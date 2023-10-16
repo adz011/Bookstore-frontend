@@ -32,6 +32,7 @@ import { StoreService } from './services/store.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthService } from './services/auth.service';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { AuthService } from './services/auth.service';
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
+    FontAwesomeModule,
 
   ],
   providers: [CartService, StoreService, AuthService],

@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <footer >
   <div  class ="p-12 bg-zinc-700 shadow-sm text-green">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
+    <div class="max-w-7xl mx-auto font-serif">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-12">
         <div class="mb-5 text-yellow-600">
-          <h4>Shopping with us</h4>
-          <ul>
+          <h4 class=" font-serif">Shopping with us</h4>
+          <ul class="gap-5">
             <li>Contact Us</li>
             <li>Returning items</li>
             <li>Student Discount</li>
@@ -28,25 +28,43 @@
             <li>Bookstore app</li>
           </ul>
         </div>
-        <div class="mb-5 text-yellow-600">
-          <h4>Follow Us</h4>
-          <ul>
-            <li>
-              <a href="#" class="circle-button bg-blue-500">
-                <i class="fa fa-facebook text-white"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="circle-button bg-blue-500">
-                <i class="fa fa-twitter text-white"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="circle-button bg-red-600">
-                <i class="fa fa-youtube text-white"></i>
-              </a>
-            </li>
-          </ul>
+        <div class="mb-5 text-yellow-600 text-center">  
+          <div>Follow us</div>
+          <div class="grid grid-cols-2 gap-0 text-left justify-center">
+            <div class="flex justify-center">
+              <ul>
+                <li>
+                  <div>adz011</div>
+                </li>
+                <li>
+                    <fa-icon [icon]="faGithub" size="2x" animation="beat" class="text-white"></fa-icon>
+                </li>
+                <li>
+                    <fa-icon [icon]="faTwitter" size="2x" class="text-white" ></fa-icon>
+                </li>
+                <li>
+                    <fa-icon [icon]="faYouTube" size="2x" class="text-white"></fa-icon>
+                </li>
+              </ul>
+            </div>
+            <div class="flex justify-center">
+              <ul>
+                <li>
+                  <div>Mateusz113</div>
+                </li>
+                <li>
+                    <fa-icon [icon]="faGithub" size="2x" animation="beat"  class="text-yellow-100"></fa-icon>
+                </li>
+                <li>
+                    <fa-icon [icon]="faTwitter" size="2x"  class="text-yellow-100"></fa-icon>
+                </li>
+                <li>
+                    <fa-icon [icon]="faYouTube" size="2x" class="text-yellow-100" ></fa-icon>
+                </li>
+              </ul>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -55,11 +73,10 @@
   <div class="w-full bg-zinc-700 text-gray px10">
     <div class="max-w-7xl flex flex-col sm:flex-row py-4 mx-auto justify-between items-center">
       <div class="text-center">
-        <div>
-          Copyright
+        <div class="text-zinc-500">
+          © MIT License, 2023 
         </div>
         <div>
-          Designed by
         </div>
       </div>
     </div>
