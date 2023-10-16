@@ -1,0 +1,11 @@
+.header-spacer {
+    flex: 1 1 auto;
+    
+  }
+.header-space-between{
+    display: inline-flex;
+    justify-content: space-between;
+}
+.mat-icon {
+    font-size: 32px; /* Adjust the font size as needed */
+}
