@@ -1,16 +1,16 @@
-<mat-card *ngIf = "item" [ngClass] = "{'text-center' : !fullWidthMode}">
+<mat-card *ngIf = "auction" [ngClass] = "{'text-center' : !fullWidthMode}">
     <div [ngClass] = "{flex: fullWidthMode}">
         <img class="mb-1 mx-auto"
         [ngClass] ="{'h-200px': !fullWidthMode, 'h-[360px]' : fullWidthMode}"
-           [src] = "item.thumbnail" />
-        <div class="w-full" [ngClass] ="{'px-8 flex flex-col justify-between' : fullWidthMode}">
+           [src] = "auction.item.thumbnail" />
+        <div class="w-full font-serif" [ngClass] ="{'px-8 flex flex-col justify-between' : fullWidthMode}">
             <div>
-                <h5>{{item.itemType}}</h5>
-                <p class="truncate hover:whitespace-normal">{{item.title}}</p>
-                <p *ngIf = "fullWidthMode">{{item.description}}</p>
+                <span class="text-xl text-gray-800">{{auction.item.title}}</span>
+                <p class="truncate hover:whitespace-normal text-orange-500">{{auction.item.authors}}</p>
+                <p *ngIf = "fullWidthMode">{{auction.item.description}}</p>
             </div>
             <div class="flex justify-between">
-                <span class="text-red-400">{{'150' | currency}}
+                <span class="text-red-400 text-xl">{{auction.price | currency}}
 
                 </span>
                 <button (click) = "onAddToCart()">

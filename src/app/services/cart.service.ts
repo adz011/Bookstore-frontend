@@ -8,6 +8,10 @@ import { Cart, CartItem } from '../models/cart.model';
   providedIn: 'root'
 })
 export class CartService {
+  cart = new BehaviorSubject<Cart>({items:[]});
+
+  constructor(private _snackBar: MatSnackBar) { }
+
   removeQuantity(element: CartItem) {
     this.cart.value.items.map((_item)=>{
       if(_item.id === element.id){
@@ -29,9 +33,8 @@ export class CartService {
     this._snackBar.open('1 item removed from cart.' , 'Ok', {duration : 3000});
     
   }
-  cart = new BehaviorSubject<Cart>({items:[]});
 
-  constructor(private _snackBar: MatSnackBar) { }
+
 
   addToCart(item : CartItem){
     const items = [...this.cart.value.items];

@@ -33,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthService } from './services/auth.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     MatFormFieldModule,
     MatInputModule,
     FontAwesomeModule,
+    ClipboardModule,
 
   ],
   providers: [CartService, StoreService, AuthService],

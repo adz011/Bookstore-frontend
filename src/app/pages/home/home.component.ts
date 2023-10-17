@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {  Subscription } from 'rxjs';
+import { Auction } from 'src/app/models/auction.model';
 import { Item } from 'src/app/models/item.model';
 import { CartService } from 'src/app/services/cart.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -14,16 +15,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   cols= 3;
   category : string | undefined;
   rowHeight = ROWS_HEIGHT[this.cols];
-  items : Array<Item> | undefined;
+  auctions : Array<Auction> | undefined;
   count ='12';
-  sort = 'desc';
-  itemsSubscription : Subscription | undefined;
+  sort = 'descending';
+  auctionSubscription : Subscription | undefined;
   constructor(private cartService: CartService, private storeService: StoreService){
 
   }
   ngOnDestroy(): void {
-    if(this.itemsSubscription){
-      this.itemsSubscription.unsubscribe();
+    if(this.auctionSubscription){
+      this.auctionSubscription.unsubscribe();
     }
   }
   ngOnInit(){
@@ -31,8 +32,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getItems(){
-    this.itemsSubscription = this.storeService.getItems().subscribe((_items) =>{
-      this.items = _items;
+    this.auctionSubscription = this.storeService.getItems(this.count, this.sort).subscribe((_auctions) =>{
+      this.auctions = _auctions;
     });
   }
   onColumnsCountChange(colsNum : any){
@@ -40,18 +41,35 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.rowHeight = ROWS_HEIGHT[this.cols];
   }
 
+  onSortChange(sort : string){
+    this.sort = sort;
+    this.getItems();
+  }
+
+  onItemsCountChange(quantity : any){
+    this.count = quantity.toString();
+    this.getItems();
+  }
+
   onShowCategory(category:string){
       this.category = category;
   }
 
-  onAddToCart(item:Item){
-    this.cartService.addToCart({
-      type: item.itemType,
-      name: item.title,
-      price: 100,
-      quantity: 1,
-      id: item.id
+  getProducts(): void {
+    this.auctionSubscription = this.storeService
+      .getItems(this.count)
+      .subscribe((_auctions) => {
+        this.auctions= _auctions;
+      });
+  }
 
+  onAddToCart(auction:Auction){
+    this.cartService.addToCart({
+      name: auction.item.title,
+      price: auction.price,
+      quantity: 1,
+      id: auction.id,
+      thumbnail: auction.item.thumbnail
     })
   }
 }

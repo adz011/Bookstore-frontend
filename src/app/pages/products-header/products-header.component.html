@@ -21,7 +21,9 @@
                     </mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="onSortUpdated('descending')">Descending</button>
+                    <button (click)="onItemsUpdated(8)" mat-menu-item>8</button>
+                    <button (click)="onItemsUpdated(12)" mat-menu-item>12</button>
+                    <button (click)="onItemsUpdated(16)" mat-menu-item>16</button>
                 </mat-menu>
             </div>
             <button>

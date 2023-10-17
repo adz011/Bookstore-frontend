@@ -1,4 +1,5 @@
-import { Component, ɵsetCurrentInjector } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component} from '@angular/core';
 import { Cart, CartItem } from '../models/cart.model';
 import { CartService } from '../services/cart.service';
 
@@ -8,26 +9,20 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent {
-  cart: Cart = {items: [{
-    type : 'food',
-    name : 'snickers',
-    price: 150,
-    quantity: 1,
-    id : '1',
-}]};
+  cart: Cart = {items: []};
 
 dataSource : Array<CartItem> = [];
 
 displayedColumns: Array<string> = [
-  'type',
+  'product',
   'name',
   'price',
   'quantity',
   'total',
-  'action'
+  'action',
 ]
 
-constructor(private cartService: CartService){
+constructor(private cartService: CartService,  private http: HttpClient){
 
 }
 
@@ -53,4 +48,10 @@ onAddQuantity(element : CartItem){
 onRemoveQuantity(element : CartItem){
   this.cartService.removeQuantity(element);
 }
-}
+
+  onCheckout(): void {
+    this.http
+      .post('http://localhost:4242/checkout', {
+        items: this.cart.items,
+      })
+}}
