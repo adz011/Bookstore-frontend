@@ -34,6 +34,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthService } from './services/auth.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     MatInputModule,
     FontAwesomeModule,
     ClipboardModule,
+    MatPaginatorModule,
 
   ],
   providers: [CartService, StoreService, AuthService],

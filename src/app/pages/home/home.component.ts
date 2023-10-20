@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import {  Subscription } from 'rxjs';
 import { Auction } from 'src/app/models/auction.model';
 import { Item } from 'src/app/models/item.model';
@@ -16,8 +17,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   category : string | undefined;
   rowHeight = ROWS_HEIGHT[this.cols];
   auctions : Array<Auction> | undefined;
-  count ='12';
+  pageIndex =0;
+  pageSize=12;
   sort = 'descending';
+  itemsTotalCount = 0;
   auctionSubscription : Subscription | undefined;
   constructor(private cartService: CartService, private storeService: StoreService){
 
@@ -32,9 +35,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getItems(){
-    this.auctionSubscription = this.storeService.getItems(this.count, this.sort).subscribe((_auctions) =>{
+    this.auctionSubscription = this.storeService.getItems(this.sort, this.pageIndex, this.pageSize).subscribe((_auctions) =>{
       this.auctions = _auctions;
+      this.itemsTotalCount = this.auctions[0].totalItems; 
     });
+  }
+
+  getItemsDescending(){
+
   }
   onColumnsCountChange(colsNum : any){
     this.cols = colsNum; 
@@ -46,21 +54,25 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getItems();
   }
 
-  onItemsCountChange(quantity : any){
-    this.count = quantity.toString();
+  onItemsCountChange(pageSize : any){
+    this.pageSize = pageSize;
     this.getItems();
+
   }
 
   onShowCategory(category:string){
       this.category = category;
   }
 
-  getProducts(): void {
-    this.auctionSubscription = this.storeService
-      .getItems(this.count)
-      .subscribe((_auctions) => {
-        this.auctions= _auctions;
-      });
+  onPageChange(page: any){
+    this.pageIndex = page;
+    this.getItems();
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.getItems();
   }
 
   onAddToCart(auction:Auction){

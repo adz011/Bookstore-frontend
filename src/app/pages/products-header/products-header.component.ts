@@ -9,9 +9,10 @@ export class ProductsHeaderComponent {
   @Output() columnsCountChange = new EventEmitter<number>();
   @Output() itemsCountChange = new EventEmitter<number>();
   @Output() sortChange = new EventEmitter<string>();
+  @Output() pageChange = new EventEmitter<number>();
   itemsShowCount = 12;
   sort = 'descending';
-
+  page = 1;
   constructor() {}
 
   onColumnsUpdated(colsNum: number): void {
@@ -26,5 +27,10 @@ export class ProductsHeaderComponent {
   onSortUpdated(newSort: string): void {
     this.sortChange.emit(newSort);
     this.sort = newSort;
+  }
+
+  onPageUpdated(page: number){
+    this.pageChange.emit(page);
+    this.page = page;
   }
 }
