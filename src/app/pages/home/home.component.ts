@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import {  Subscription } from 'rxjs';
-import { Auction } from 'src/app/models/auction.model';
+import { Auction, Auctions } from 'src/app/models/auction.model';
 import { Item } from 'src/app/models/item.model';
 import { CartService } from 'src/app/services/cart.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   category : string | undefined;
   rowHeight = ROWS_HEIGHT[this.cols];
   auctions : Array<Auction> | undefined;
+  auctionsData : Auctions | undefined;
   pageIndex =0;
   pageSize=12;
   sort = 'descending';
@@ -35,9 +36,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getItems(){
-    this.auctionSubscription = this.storeService.getItems(this.sort, this.pageIndex, this.pageSize).subscribe((_auctions) =>{
-      this.auctions = _auctions;
-      this.itemsTotalCount = this.auctions[0].totalItems; 
+    this.auctionSubscription = this.storeService.getItems(this.sort, this.pageIndex, this.pageSize, this.category).subscribe((_auctions) =>{
+      this.auctionsData = _auctions;
+      this.itemsTotalCount = this.auctionsData.totalItems; 
+      this.auctions = this.auctionsData.auctionDTOList;
     });
   }
 
@@ -62,6 +64,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onShowCategory(category:string){
       this.category = category;
+      console.log("called on show category method");
+        this.getItems();
   }
 
   onPageChange(page: any){
@@ -81,7 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       price: auction.price,
       quantity: 1,
       id: auction.id,
-      thumbnail: auction.item.thumbnail
+      thumbnail: auction.item.imageLinks.smallThumbnail,
     })
   }
 }

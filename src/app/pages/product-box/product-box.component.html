@@ -2,11 +2,11 @@
     <div [ngClass] = "{flex: fullWidthMode}">
         <img class="mb-1 mx-auto"
         [ngClass] ="{'h-200px': !fullWidthMode, 'h-[360px]' : fullWidthMode}"
-           [src] = "auction.item.thumbnail" />
+           [src] = "auction.item.imageLinks.thumbnail" />
         <div class="w-full font-serif" [ngClass] ="{'px-8 flex flex-col justify-between' : fullWidthMode}">
             <div>
                 <span class="text-xl text-gray-800">{{auction.item.title}}</span>
-                <p class="truncate hover:whitespace-normal text-orange-500">{{auction.item.authors}}</p>
+                <p class="truncate hover:whitespace-normal text-orange-500" *ngFor = "let author of auction.item.authors">{{author.name}}</p>
                 <p *ngIf = "fullWidthMode">{{auction.item.description}}</p>
             </div>
             <div class="flex justify-between">
