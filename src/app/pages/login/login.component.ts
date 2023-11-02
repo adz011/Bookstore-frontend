@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,7 +11,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 
 export class LoginComponent {
+  snackBar : MatSnackBar | undefined;
   @Input() error: string | null | undefined;
+  @Input() email: boolean | string | undefined;
   
   @Output() submitEM = new EventEmitter();
   form: FormGroup = new FormGroup({
@@ -30,7 +33,6 @@ export class LoginComponent {
 
     login() {
         const val = this.form.value;
-
         if (val.email && val.password) {
             this.authService.login(val.email, val.password)
                 .subscribe(
@@ -39,7 +41,7 @@ export class LoginComponent {
                         this.router.navigateByUrl('/');
                     }
                 );
-        }
+      }
     }
     submit() {
       if (this.form.valid) {
