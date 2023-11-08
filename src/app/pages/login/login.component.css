@@ -1,28 +1,44 @@
-:host {
-    display: flex;
-    justify-content: center;
-    margin: 100px 0px;
-  }
+.form-container {
+  display: flex;
+  justify-content: center;
+}
 
-  .mat-form-field {
-    width: 100%;
-    min-width: 00px;
-  }
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  place-content: center;
+}
 
-  mat-card-title,
-  mat-card-content {
-    display: flex;
-    justify-content: center;
-  }
+.title {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
 
-  .error {
-    padding: 16px;
-    width: 300px;
-    color: white;
-    background-color: red;
-  }
 
-  .button {
-    display: flex;
-    justify-content: flex-end;
-  }
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 63%;
+}
+
+mat-form-field {
+  width: 300px;
+}
+
+mat-card-title {
+  align-self: center;
+  padding-bottom: 10px;
+}
+
+mat-card {
+  padding: 10px 10px;
+  align-self: center;
+  width: 30%;
+}
+
+button {
+  margin-right: 10px;
+}

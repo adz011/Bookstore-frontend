@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from 'src/app/services/auth.service';
+import {FormValidationService} from "../../services/form-validation.service";
+import {UserRepresentation} from "../../models/user.model";
+import {JWTTokenService} from "../../services/jwttoken.service";
 
 @Component({
   selector: 'app-login',
@@ -10,42 +12,41 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent {
-  snackBar : MatSnackBar | undefined;
-  @Input() error: string | null | undefined;
-  @Input() email: boolean | string | undefined;
-  
-  @Output() submitEM = new EventEmitter();
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
-    hide = true;
-    constructor(private fb:FormBuilder, 
-                 private authService: AuthService, 
-                 private router: Router) {
+export class LoginComponent implements OnInit {
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required)
+  })
 
-        this.form = this.fb.group({
-            email: ['',Validators.required],
-            password: ['',Validators.required]
-        });
-    }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private formValidation: FormValidationService
+  ) {
+  }
 
-    login() {
-        const val = this.form.value;
-        if (val.email && val.password) {
-            this.authService.login(val.email, val.password)
-                .subscribe(
-                    () => {
-                        console.log("User is logged in");
-                        this.router.navigateByUrl('/');
-                    }
-                );
-      }
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()){
+      this.router.navigate([('/home')])
     }
-    submit() {
-      if (this.form.valid) {
-        this.submitEM.emit(this.form.value);
-      }
+  }
+
+  login() {
+    if (this.loginForm.valid) {
+      const val = this.loginForm.value;
+      let user = new UserRepresentation(
+        val.email!!,
+        val.password!!
+      )
+      this.authService.login(user)
     }
+  }
+
+  invalidFormMsg(formControl: FormControl<string | null>) {
+    return this.formValidation.getErrorMessage(formControl)
+  }
+
+  navigateToRegister() {
+    this.router.navigate([('/register')])
+  }
 }
