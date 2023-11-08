@@ -35,6 +35,8 @@ import { AuthService } from './services/auth.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { RegisterComponent } from './pages/register/register.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ProductBoxComponent,
     CartComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FontAwesomeModule,
     ClipboardModule,
     MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule,
 
   ],
   providers: [CartService, StoreService, AuthService],
