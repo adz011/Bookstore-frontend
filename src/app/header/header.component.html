@@ -4,8 +4,8 @@
             <button mat-icon-button class="menu-icon" aria-label="menu-icon">
                 <mat-icon>menu</mat-icon>
             </button>
-            <button mat-raised-button color="primary" routerLink="home">Bookstore</button>
-            <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+            <button mat-raised-button color="primary" routerLink="['/home']">Bookstore</button>
+            <button mat-raised-button color="primary" *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
         </div>
         <div>
             <button mat-icon-button [matMenuTriggerFor]="menu" class="shopping_cart-icon"

@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Cart, CartItem} from '../models/cart.model';
-import {Item} from '../models/item.model';
 import {CartService} from '../services/cart.service';
 import {AuthService} from "../services/auth.service";
 
@@ -46,6 +45,10 @@ export class HeaderComponent {
 
   onClearCart() {
     this.cartService.clearCart();
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn()
   }
 
   logout() {
