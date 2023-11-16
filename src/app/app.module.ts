@@ -18,8 +18,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GridListDynamicComponent } from './grid-list-dynamic/grid-list-dynamic.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -29,12 +29,15 @@ import { ProductBoxComponent } from './pages/product-box/product-box.component';
 import { CartComponent } from './cart/cart.component';
 import { CartService } from './services/cart.service';
 import { StoreService } from './services/store.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthService } from './services/auth.service';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ClipboardModule} from '@angular/cdk/clipboard';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { RegisterComponent } from './pages/register/register.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { TokenInterceptor } from "./interceptors/token-interceptor";
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ProductBoxComponent,
     CartComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,9 +76,21 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FontAwesomeModule,
     ClipboardModule,
     MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule,
 
   ],
-  providers: [CartService, StoreService, AuthService],
+  providers: [
+    CartService,
+    StoreService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
