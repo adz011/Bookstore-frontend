@@ -6,15 +6,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Node version 18.18.0 https://nodejs.org/en/blog/release/v18.18.0
 
 
-It's 
-
 ## How to run
 This guide is not comprehensive and only assumes installation for Windows users. This project isn't guaranteed to run on other operating systems.
 
 You need to download Node.js, preferably the same version as used during development https://nodejs.org/en/download/current.
 Upon installing Node, check that it works by opening shell and running command:
 ```sh
-npm
+npm -v
 ```
 Node.js installer should automatically add itself to global variables, so if the command above failed, check global variables.
 
@@ -27,7 +25,7 @@ npm install -g @angular/cli
 To check cli run
 
 ```sh
-ng
+ng v
 ```
 If you get 
 ```sh
